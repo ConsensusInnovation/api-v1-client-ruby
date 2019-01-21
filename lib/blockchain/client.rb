@@ -22,6 +22,7 @@ module Blockchain
             url = URI.parse(@base_url + resource)
             http = Net::HTTP.new(url.host, url.port)
             http.use_ssl = @base_url.start_with? 'https://'
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE if http.use_ssl?
             http.read_timeout = TIMEOUT_SECONDS
 
             request = nil
